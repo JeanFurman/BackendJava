@@ -1,7 +1,7 @@
 package br.com.banco.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,8 @@ public class Transferencia {
 	private Long id;
 	
 	@NotNull
-    private Timestamp data_transferencia;
+	@Column(name = "data_transferencia")
+    private LocalDateTime dataTransferencia;
 	
 	@NotNull
 	@Digits(integer=20, fraction=2)
@@ -36,12 +37,12 @@ public class Transferencia {
 	@Column(length = 15, nullable = false)
     private String tipo;
 	
-	@Column(length = 50)
-    private String nome_operador_transacao;
+	@Column(length = 50, name = "nome_operador_transacao", nullable = true)
+    private String nomeOperadorTransacao;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "conta_id", nullable = false)
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private Conta conta;
+	private Conta contaId;
 
 }
