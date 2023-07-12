@@ -19,12 +19,13 @@ public class Conta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_conta;
+	@Column(name = "id_conta")
+	private Long idConta;
 	
-	@Column(length = 50, nullable = false)
-	private String nome_responsavel;
+	@Column(length = 50, nullable = false, name = "nome_responsavel")
+	private String nomeResponsavel;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "conta")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "contaId")
 	private List<Transferencia> transferencias = new ArrayList<>();
 	
 }
