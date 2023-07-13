@@ -53,6 +53,15 @@ public class BancoApplication {
 			
 			c1.getTransferencias().add(t3);
 			
+			Transferencia t20 = new Transferencia();
+			t20.setDataTransferencia(LocalDateTime.parse("2022-06-08 10:15:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			t20.setValor(BigDecimal.valueOf(3241.23));
+			t20.setTipo("TRANSFERENCIA");
+			t20.setNomeOperadorTransacao("Beltrano");
+			t20.setContaId(c1);
+			
+			c1.getTransferencias().add(t20);
+			
 			Conta c2 = new Conta();
 			c2.setNomeResponsavel("Sicrano");
 			
