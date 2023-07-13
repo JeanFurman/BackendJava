@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 import org.springframework.http.ResponseEntity;
@@ -37,9 +38,9 @@ public class TransferenciaController {
 	
 	@GetMapping
 	public ResponseEntity<List<Transferencia>> filtroParaAsTransferencias(
-			@RequestParam(required = false, defaultValue = "") String nome, 
-			@RequestParam(required = false, defaultValue = "") String dataInicio,
-			@RequestParam(required = false, defaultValue = "") String dataFim){
+			@RequestParam(required = false, defaultValue = "") @Pattern(regexp= "^[a-zA-Z ]{1,50}$") String nome, 
+			@RequestParam(required = false, defaultValue = "") @Pattern(regexp= "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$") String dataInicio,
+			@RequestParam(required = false, defaultValue = "") @Pattern(regexp= "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$") String dataFim){
 		if(!nome.isBlank() && !dataInicio.isBlank() & !dataFim.isBlank()) {
 			LocalDateTime dataI = LocalDateTime.parse(dataInicio, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			LocalDateTime dataF = LocalDateTime.parse(dataFim, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -63,7 +64,5 @@ public class TransferenciaController {
 		}
 		return ResponseEntity.ok(transferenciaService.listarTodasAsTransferencias());
 
-		
-		
 	}
 }
