@@ -29,9 +29,9 @@ public class BancoApplication {
 			c1.setNomeResponsavel("Fulano");
 			
 			Transferencia t1 = new Transferencia();
-			t1.setDataTransferencia(LocalDateTime.parse("2019-01-01 12:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			t1.setDataTransferencia(LocalDateTime.parse("01-01-2019 12:00:00", DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss")));
 			t1.setValor(BigDecimal.valueOf(30895.46));
-			t1.setTipo("DEPOSITO");
+			t1.setTipo("Depósito");
 			t1.setContaId(c1);
 			
 			c1.getTransferencias().add(t1);
@@ -39,7 +39,7 @@ public class BancoApplication {
 			Transferencia t2 = new Transferencia();
 			t2.setDataTransferencia(LocalDateTime.parse("2019-05-04 08:12:45", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			t2.setValor(BigDecimal.valueOf(-500.50));
-			t2.setTipo("SAQUE");
+			t2.setTipo("Saque");
 			t2.setContaId(c1);
 			
 			c1.getTransferencias().add(t2);
@@ -47,7 +47,7 @@ public class BancoApplication {
 			Transferencia t3 = new Transferencia();
 			t3.setDataTransferencia(LocalDateTime.parse("2020-06-08 10:15:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			t3.setValor(BigDecimal.valueOf(3241.23));
-			t3.setTipo("TRANSFERENCIA");
+			t3.setTipo("Transferência");
 			t3.setNomeOperadorTransacao("Beltrano");
 			t3.setContaId(c1);
 			
@@ -56,7 +56,7 @@ public class BancoApplication {
 			Transferencia t20 = new Transferencia();
 			t20.setDataTransferencia(LocalDateTime.parse("2022-06-08 10:15:01", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			t20.setValor(BigDecimal.valueOf(3241.23));
-			t20.setTipo("TRANSFERENCIA");
+			t20.setTipo("Transferência");
 			t20.setNomeOperadorTransacao("Beltrano");
 			t20.setContaId(c1);
 			
@@ -68,19 +68,19 @@ public class BancoApplication {
 			Transferencia t4 = new Transferencia();
 			t4.setDataTransferencia(LocalDateTime.parse("2019-02-03 09:53:27", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			t4.setValor(BigDecimal.valueOf(12.24));
-			t4.setTipo("DEPOSITO");
+			t4.setTipo("Depósito");
 			t4.setContaId(c2);
 			
 			Transferencia t5 = new Transferencia();
 			t5.setDataTransferencia(LocalDateTime.parse("2019-08-07 08:12:45", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			t5.setValor(BigDecimal.valueOf(-530.50));
-			t5.setTipo("SAQUE");
+			t5.setTipo("Saque");
 			t5.setContaId(c2);
 			
 			Transferencia t6 = new Transferencia();
 			t6.setDataTransferencia(LocalDateTime.parse("2021-04-01 12:12:04", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-			t6.setValor(BigDecimal.valueOf(25173.09));
-			t6.setTipo("TRANSFERENCIA");
+			t6.setValor(BigDecimal.valueOf(-25173.09));
+			t6.setTipo("Transferência");
 			t6.setNomeOperadorTransacao("Ronnyscley");
 			t6.setContaId(c2);
 			
