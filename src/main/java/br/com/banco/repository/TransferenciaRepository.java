@@ -11,6 +11,4 @@ import br.com.banco.model.Transferencia;
 public interface TransferenciaRepository extends JpaRepository<Transferencia, Long>{
 	List<Transferencia> findByContaId(Conta contaId);
 	List<Transferencia> findByNomeOperadorTransacao(String nomeOperadorTransacao);
-	
-	
 }

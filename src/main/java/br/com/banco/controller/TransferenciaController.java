@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.banco.dto.PageDTO;
@@ -34,14 +35,14 @@ public class TransferenciaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PageDTO<Transferencia>> buscarTransferenciasPorIdConta(
+	public PageDTO<Transferencia> buscarTransferenciasPorIdConta(
 			Pageable pageable,
 			@PathVariable @NotNull @Positive Long id){
-		return new ResponseEntity<>(transferenciaService.buscarTransferenciasPorIdConta(pageable, id), HttpStatus.OK);
+		return transferenciaService.buscarTransferenciasPorIdConta(pageable, id);
 	}
 	
 	@GetMapping
-	public ResponseEntity<PageDTO<Transferencia>> filtroParaAsTransferencias(
+	public PageDTO<Transferencia> filtroParaAsTransferencias(
 			Pageable pageable,
 			@RequestParam(required = false, defaultValue = "") String nome, 
 			@RequestParam(required = false, defaultValue = "") String dataInicio,
@@ -57,14 +58,14 @@ public class TransferenciaController {
 			.filter(t -> t.getDataTransferencia().equals(dataI) || t.getDataTransferencia().isAfter(dataI))
 			.filter(t -> t.getDataTransferencia().equals(dataF) || t.getDataTransferencia().isBefore(dataF))
 			.collect(Collectors.toList()));
-			return ResponseEntity.ok(pages);
+			return pages;
 		}
 		if(!nome.isBlank() && dataInicio.isBlank() & dataFim.isBlank()) {
 			String nomeValid = transferenciaService.validaNome(nome, regexNome);
 			
 			PageDTO<Transferencia> pages = transferenciaService
 					.fazPaginas(pageable.getPageNumber(), transferenciaService.buscarTransferenciasPorNomeOperadorTransacao(nomeValid));
-			return ResponseEntity.ok(pages);
+			return pages;
 		}
 		if(nome.isBlank() && !dataInicio.isBlank() & !dataFim.isBlank()) {
 			LocalDateTime dataI = transferenciaService.validaData(dataInicio, regexData);
@@ -76,11 +77,11 @@ public class TransferenciaController {
 							.filter(t -> t.getDataTransferencia().equals(dataI) || t.getDataTransferencia().isAfter(dataI))
 							.filter(t -> t.getDataTransferencia().equals(dataF) || t.getDataTransferencia().isBefore(dataF))
 							.collect(Collectors.toList()));
-			return ResponseEntity.ok(pages);
+			return pages;
 		}
 		PageDTO<Transferencia> pages = transferenciaService
 				.fazPaginas(pageable.getPageNumber(),transferenciaService.listarTodasAsTransferencias());
-		return ResponseEntity.ok(pages);
-
+		return pages;
+		
 	}
 }

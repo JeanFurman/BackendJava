@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class Conta {
 	@Column(name = "id_conta")
 	private Long idConta;
 	
+	@NotNull
 	@Column(length = 50, nullable = false, name = "nome_responsavel")
 	private String nomeResponsavel;
 	
