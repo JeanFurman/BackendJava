@@ -1,7 +1,6 @@
 package br.com.banco.controller;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
@@ -62,6 +61,7 @@ public class TransferenciaController {
 		}
 		if(!nome.isBlank() && dataInicio.isBlank() & dataFim.isBlank()) {
 			String nomeValid = transferenciaService.validaNome(nome, regexNome);
+			
 			PageDTO<Transferencia> pages = transferenciaService
 					.fazPaginas(pageable.getPageNumber(), transferenciaService.buscarTransferenciasPorNomeOperadorTransacao(nomeValid));
 			return ResponseEntity.ok(pages);

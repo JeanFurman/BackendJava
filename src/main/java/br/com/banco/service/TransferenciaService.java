@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.banco.dto.PageDTO;
+import br.com.banco.exception.RegistroNotFoundException;
 import br.com.banco.model.Transferencia;
 import br.com.banco.repository.ContaRepository;
 import br.com.banco.repository.TransferenciaRepository;
@@ -34,13 +35,17 @@ public class TransferenciaService {
 	public PageDTO<Transferencia> buscarTransferenciasPorIdConta(Pageable pageable, Long id) {
 		List<Transferencia> l = contaRepository.findById(id)
 				.map(c -> transferenciaRepository.findByContaId(c))
-				.orElseThrow(() -> new RuntimeException("Conta not found"));
+				.orElseThrow(() -> new RegistroNotFoundException(String.valueOf(id)));
 		return fazPaginas(pageable.getPageNumber(), l);
 		
 	}
 	
 	public List<Transferencia> buscarTransferenciasPorNomeOperadorTransacao(String nome) {
-		return transferenciaRepository.findByNomeOperadorTransacao(nome);
+		List<Transferencia> l = transferenciaRepository.findByNomeOperadorTransacao(nome);
+		if(l.size() < 1) {
+			throw new RegistroNotFoundException(nome);
+		}
+		return l;
 	}
 	
 	public PageDTO<Transferencia> fazPaginas(int pageNumber, List<Transferencia> lista){
@@ -56,7 +61,7 @@ public class TransferenciaService {
         PageRequest pageRequest = PageRequest.of(page, pageSize);
         Page p = new PageImpl<>(elements, pageRequest, totalElements);
         
-        PageDTO<Transferencia> pdto = new PageDTO();
+        PageDTO<Transferencia> pdto = new PageDTO<>();
         pdto.setContent(p.getContent());
         pdto.setTotalPages(p.getTotalPages());
         pdto.setTotalElements(p.getTotalElements());
