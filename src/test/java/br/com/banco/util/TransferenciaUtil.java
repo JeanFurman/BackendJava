@@ -46,19 +46,11 @@ public class TransferenciaUtil {
 		t2.setValor(BigDecimal.valueOf(30895.46));
 		t2.setTipo("Depósito");
 		t2.setContaId(c1);
+		t1.setNomeOperadorTransacao("Beltrano");
 		
 		c1.getTransferencias().add(t2);
 		
-		Transferencia t3 = new Transferencia();
-		t3.setDataTransferencia(LocalDateTime.parse("01-01-2021 12:00:00", DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss")));
-		t3.setValor(BigDecimal.valueOf(30895.46));
-		t3.setTipo("Depósito");
-		t3.setContaId(c1);
-		t3.setNomeOperadorTransacao("Ronnyscley");
-		
-		c1.getTransferencias().add(t3);
-		
-		return List.of(t1, t2, t3);
+		return List.of(t1, t2);
 	}
 
 }
